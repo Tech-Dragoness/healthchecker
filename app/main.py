@@ -1,4 +1,4 @@
-# Task 1 Updated/app/main.py
+# HealthChecker/app/main.py
 """
 main.py  –  FastAPI application entry point for HealthChecker.
 """

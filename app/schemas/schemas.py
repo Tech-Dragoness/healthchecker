@@ -1,4 +1,4 @@
-# Task 1 Updated/app/schemas/schemas.py
+# HealthChecker/app/schemas/schemas.py
 """
 schemas/schemas.py  –  Pydantic v2 request/response models.
 """

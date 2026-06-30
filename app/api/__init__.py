@@ -1,4 +1,4 @@
-# Task 1 Updated/app/api/__init__.py
+# HealthChecker/app/api/__init__.py
 from fastapi import APIRouter
 from app.api.routes.applications import router as applications_router
 

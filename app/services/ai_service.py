@@ -1,4 +1,4 @@
-# Task 1 Updated/app/services/ai_service.py
+# HealthChecker/app/services/ai_service.py
 """
 services/ai_service.py  –  Gemini API integration with key rotation.
 

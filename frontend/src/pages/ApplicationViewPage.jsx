@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/pages/ApplicationViewPage.jsx
+// HealthChecker/frontend/src/pages/ApplicationViewPage.jsx
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar.jsx'

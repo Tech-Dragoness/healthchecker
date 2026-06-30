@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/api/applications.js
+// HealthChecker/frontend/src/api/applications.js
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 async function handle(res) {

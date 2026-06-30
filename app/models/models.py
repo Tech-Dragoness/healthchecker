@@ -1,4 +1,4 @@
-# Task 1 Updated/app/models/models.py
+# HealthChecker/app/models/models.py
 """
 models/models.py  –  SQLAlchemy ORM model for HealthChecker.
 

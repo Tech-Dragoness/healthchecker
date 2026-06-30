@@ -1,4 +1,4 @@
-# Task 1 Updated/app/db/connection.py
+# HealthChecker/app/db/connection.py
 """
 db/connection.py  –  Single source of truth for the database connection.
 All other files that need a DB session import from here.
@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Always load the .env that sits at the project root (Task 1 Updated/.env)
+# Always load the .env that sits at the project root (HealthChecker/.env)
 _ROOT_ENV = Path(__file__).resolve().parent.parent.parent / ".env"
 load_dotenv(dotenv_path=_ROOT_ENV if _ROOT_ENV.exists() else None)
 

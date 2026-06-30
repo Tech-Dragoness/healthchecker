@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/utils/validation.js
+// HealthChecker/frontend/src/utils/validation.js
 const NAME_RE = /^[A-Za-z\s\-]{3,120}$/
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 

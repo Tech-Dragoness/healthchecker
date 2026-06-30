@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/vite.config.js
+// HealthChecker/frontend/vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

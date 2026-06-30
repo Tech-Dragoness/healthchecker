@@ -1,4 +1,4 @@
-# Task 1 Updated/.gitignore
+# HealthChecker/.gitignore
 
 # Secrets — never commit
 .env

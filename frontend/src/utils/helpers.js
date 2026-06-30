@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/utils/helpers.js
+// HealthChecker/frontend/src/utils/helpers.js
 export function formatDate(d) {
   if (!d) return '—'
   const date = new Date(d)

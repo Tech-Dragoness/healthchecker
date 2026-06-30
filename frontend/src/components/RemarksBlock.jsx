@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/components/RemarksBlock.jsx
+// HealthChecker/frontend/src/components/RemarksBlock.jsx
 import { parseRemarks } from '../utils/helpers'
 
 const SECTION_ORDER = ['FINDINGS', 'RISK ASSESSMENT', 'IMMEDIATE ACTIONS', 'LIFESTYLE MODIFICATIONS', 'RECOMMENDATION']

@@ -1,4 +1,4 @@
--- Task 1 Updated/app/db/setup.sql
+-- HealthChecker/app/db/setup.sql
 -- Run this once against a fresh PostgreSQL database to create everything
 -- HealthChecker needs. See README.md for exact run instructions.
 

@@ -1,4 +1,4 @@
-// Task 1 Updated/frontend/src/components/ConfirmDialog.jsx
+// HealthChecker/frontend/src/components/ConfirmDialog.jsx
 export default function ConfirmDialog({ title, message, confirmLabel = 'Confirm', danger = false, loading = false, onConfirm, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>

@@ -12,7 +12,7 @@ a hair outside the "normal" reference range is "slightly_abnormal", not "high".
 """
 from app.models.models import RiskTag
 
-# Reference ranges (gender-neutral, since this simplified system doesn't collect gender)
+# Reference ranges 
 GLUCOSE_NORMAL = (70, 99)
 GLUCOSE_SLIGHT = (60, 125)     # outside normal but inside this band => slightly abnormal
 HB_NORMAL = (12.0, 17.5)

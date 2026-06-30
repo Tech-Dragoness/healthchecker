@@ -6,10 +6,6 @@ Manages up to 5 API keys. If one returns 429 (rate limited) or fails,
 it automatically rotates to the next available key. Uses asyncio semaphore
 to limit concurrent calls and avoid flooding the API.
 
-NOTE: This file is preserved EXACTLY (logic-for-logic) from the original
-HealthPredict backend's services/ai_service.py — key rotation, model
-fallback, retry/backoff, prompt construction, and response parsing are
-all unchanged.
 """
 import asyncio
 import logging
@@ -64,21 +60,15 @@ MAX_ERROR_RETRIES = 3
 BASE_BACKOFF_S = 1.5   # doubles each retry: 1.5 → 3 → 6
 MAX_BACKOFF_S = 15.0
 
-_ALLOWED_GENDERS = {"male", "female", "other"}
-
 def _build_prompt(
     glucose: float,
     haemoglobin: float,
     cholesterol: float,
     age: int,
-    gender: str,
 ) -> str:
-    # Sanitise: only allow known gender values into the prompt
-    safe_gender = gender.lower().strip() if gender.lower().strip() in _ALLOWED_GENDERS else "not specified"
-    hb_range = "13.5–17.5 g/dL" if safe_gender == "male" else "12.0–15.5 g/dL"
     hb_status = (
-        "LOW" if (haemoglobin < 13.5 if safe_gender == "male" else haemoglobin < 12.0)
-        else "HIGH" if haemoglobin > (17.5 if safe_gender == "male" else 15.5)
+        "LOW" if (haemoglobin < 12.0)
+        else "HIGH" if haemoglobin > 17.5
         else "NORMAL"
     )
     glucose_stage = (
@@ -86,6 +76,8 @@ def _build_prompt(
         else "HIGH — consistent with uncontrolled diabetes" if glucose >= 200
         else "HIGH — consistent with diabetes" if glucose >= 126
         else "BORDERLINE — prediabetic range" if glucose >= 100
+        else "CRITICAL — severe hypoglycaemia" if glucose < 55
+        else "LOW — hypoglycaemia" if glucose < 70
         else "NORMAL"
     )
     chol_stage = (
@@ -99,13 +91,13 @@ def _build_prompt(
 ═══════════════════════════════════════════
 PATIENT BLOOD TEST DATA
 ═══════════════════════════════════════════
-Age: {age} years  |  Gender: {safe_gender.title()}
+Age: {age} years 
 
   Fasting Glucose:   {glucose} mg/dL   → {glucose_stage}
                      Reference: 70–99 mg/dL (fasting)
 
   Haemoglobin:       {haemoglobin} g/dL   → {hb_status}
-                     Reference ({safe_gender.title()}): {hb_range}
+                     Reference: 12.0–17.5 g/dL
 
   Total Cholesterol: {cholesterol} mg/dL   → {chol_stage}
                      Reference: <200 mg/dL desirable, ≥240 mg/dL high
@@ -123,13 +115,13 @@ Perform a multi-factor clinical risk analysis. Do not assess values in isolation
 - Name all probable primary diagnoses and differential conditions this panel is consistent with.
 - Note any conditions that are less likely but cannot be excluded without further investigation.
 - For each identified probable diagnosis, assign a confidence level in percentage with a one-line justification based solely on the available panel values.
-- Consider the patient's age and gender in your risk stratification.
+- Consider the patient's age in your risk stratification.
 
 IMMEDIATE ACTIONS:
 List exactly 5 numbered, specific, time-bound actions the patient should take within the next 2–4 weeks. Each action must name a specific specialist, test, dietary change, or medication class where appropriate. Generic statements like "eat healthy" or "see a doctor" are not acceptable — every action must be specific enough that the patient knows exactly what to do. Include at minimum: one specialist referral with reason, one specific diagnostic test to order next, one immediate dietary restriction, one physical activity guideline with frequency and intensity, and one monitoring instruction (e.g. self-monitoring glucose frequency).
 
 LIFESTYLE MODIFICATIONS:
-Provide 4 evidence-based, long-term lifestyle recommendations tailored precisely to this patient's values, age, and gender. Reference specific targets where possible (e.g. target HbA1c, LDL target, BMI range, weekly activity minutes). These should reflect current clinical guidelines (ADA, ACC/AHA, WHO).
+Provide 4 evidence-based, long-term lifestyle recommendations tailored precisely to this patient's values and age. Reference specific targets where possible (e.g. target HbA1c, LDL target, BMI range, weekly activity minutes). These should reflect current clinical guidelines (ADA, ACC/AHA, WHO).
 
 RECOMMENDATION:
 Write a 3–4 sentence formal clinical summary in the style of a consultant's letter to a GP. Use appropriate ICD-10 aligned terminology. Summarise the key findings, the most probable diagnoses, and the recommended clinical pathway. This section may use full medical terminology without plain-language simplification.
@@ -150,7 +142,6 @@ async def get_health_prediction(
     haemoglobin: float,
     cholesterol: float,
     age: int,
-    gender: str,
 ) -> str:
     """
     Calls Gemini API with this priority order:
@@ -164,7 +155,7 @@ async def get_health_prediction(
     if not _ALL_KEYS:
         raise RuntimeError("No Gemini API keys configured.")
 
-    prompt = _build_prompt(glucose, haemoglobin, cholesterol, age, gender)
+    prompt = _build_prompt(glucose, haemoglobin, cholesterol, age)
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {

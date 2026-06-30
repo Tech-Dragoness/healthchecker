@@ -3,12 +3,8 @@
 tasks/ai_tasks.py  –  Background task runner for AI predictions.
 
 Uses asyncio.Queue to serialize/throttle AI calls so we never overwhelm the
-API, even under load. This queue/worker/backoff pattern is preserved from
-the original HealthPredict backend's tasks/ai_tasks.py.
+API, even under load.
 
-Gender is fixed to "not specified" since this simplified system does not
-collect gender — get_health_prediction()/the prompt builder are otherwise
-untouched (see services/ai_service.py).
 """
 import asyncio
 import logging
@@ -67,7 +63,6 @@ async def _process_ai_job(app_id: UUID):
                 haemoglobin=hb,
                 cholesterol=chol,
                 age=app.age_at_submission,
-                gender="not specified",
             )
             await db.refresh(app)
             app.remarks = remark

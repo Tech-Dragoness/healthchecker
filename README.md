@@ -34,7 +34,7 @@ HealthChecker/
 - `gemini-2.5-flash` → `gemini-2.5-flash-lite` fallback
 - Exponential backoff/retries
 - Exact five-section prompt (`FINDINGS`, `RISK ASSESSMENT`, `IMMEDIATE ACTIONS`, `LIFESTYLE MODIFICATIONS`, `RECOMMENDATION`)
-- No-PII-in-prompt design (only age, gender, glucose, haemoglobin, cholesterol are ever 
+- No-PII-in-prompt design (only age, glucose, haemoglobin, cholesterol are ever 
 sent to the AI)
 - Deviation/stage labelling which prevents hallucination
 - Response parsing/salvage logic

@@ -38,7 +38,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="HealthChecker API",
     version="1.0.0",
-    description="Simplified health prediction CRUD backend.",
+    description="Simple health prediction CRUD backend.",
     lifespan=lifespan,
 )
 

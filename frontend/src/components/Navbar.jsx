@@ -9,7 +9,7 @@ export default function Navbar() {
         <span className="logo-dot" />
         <img
           src={logo}
-          alt="HealthPredict"
+          alt="HealthChecker"
           style={{
             height: "1.5em",
             width: "auto",

@@ -10,7 +10,7 @@ rotation) generates a clinical-style remark, and a rule-based engine tags the
 application's risk level. 
 
 ```
-Task 1 Updated/
+Task 1/
 ├── app/                  ← FastAPI backend
 │   ├── api/routes/applications.py
 │   ├── db/connection.py, setup.sql

@@ -10,7 +10,7 @@ rotation) generates a clinical-style remark, and a rule-based engine tags the
 application's risk level. 
 
 ```
-Task 1/
+HealthChecker/
 ├── app/                  ← FastAPI backend
 │   ├── api/routes/applications.py
 │   ├── db/connection.py, setup.sql
@@ -48,7 +48,7 @@ You need PostgreSQL installed and running.
 createdb healthchecker
 
 # Run the schema script
-psql -d healthchecker -f "Task 1 Updated/app/db/setup.sql"
+psql -d healthchecker -f "HealthChecker/app/db/setup.sql"
 ```
 
 (Or open `psql`, run `\c healthchecker`, then paste the contents of
@@ -64,7 +64,7 @@ live**; every backend module reads from it via `app/db/connection.py` and
 `app/services/ai_service.py`.
 
 ```bash
-cd "Task 1 Updated"
+cd "HealthChecker"
 cp .env.example .env
 ```
 
@@ -88,11 +88,11 @@ listed in `.gitignore` and is not a duplicate of your Gemini/DB secrets.)
 ## 3. Run the backend
 
 ```bash
-cd "Task 1 Updated/app"
+cd "HealthChecker/app"
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cd ..                            # back to "Task 1 Updated" so "app" is importable as a package
+cd ..                            # back to "HealthChecker" so "app" is importable as a package
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -102,7 +102,7 @@ Interactive API docs: `http://localhost:8000/docs`.
 ## 4. Run the frontend
 
 ```bash
-cd "Task 1 Updated/frontend"
+cd "HealthChecker/frontend"
 npm install
 npm run dev
 ```

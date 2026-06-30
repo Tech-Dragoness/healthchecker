@@ -1,0 +1,23 @@
+# Task 1 Updated/.gitignore
+
+# Secrets — never commit
+.env
+frontend/.env
+
+# Python
+app/__pycache__/
+app/**/__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.log

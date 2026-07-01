@@ -28,7 +28,7 @@ HealthChecker/
 └── .gitignore
 ```
 
-## Features
+## Key Features
 
 - 5-key rotation logic
 - `gemini-2.5-flash` → `gemini-2.5-flash-lite` fallback

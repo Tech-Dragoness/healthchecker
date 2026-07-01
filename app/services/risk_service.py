@@ -12,9 +12,8 @@ a hair outside the "normal" reference range is "slightly_abnormal", not "high".
 """
 from app.models.models import RiskTag
 
-# Reference ranges 
+# Reference ranges aligned with ai_service.py rules
 GLUCOSE_NORMAL = (70, 99)
-GLUCOSE_SLIGHT = (60, 125)     # outside normal but inside this band => slightly abnormal
 HB_NORMAL = (12.0, 17.5)
 HB_SLIGHT = (10.5, 18.5)
 CHOL_NORMAL = (0, 199)
@@ -23,10 +22,13 @@ CHOL_SLIGHT_MAX = 239
 
 def _glucose_level(g: float) -> int:
     """0 = normal, 1 = slightly abnormal, 2 = high"""
-    if GLUCOSE_NORMAL[0] <= g <= GLUCOSE_NORMAL[1]:
+    # Normal Range
+    if 70.0 <= g <= 99.0:
         return 0
-    if GLUCOSE_SLIGHT[0] <= g <= GLUCOSE_SLIGHT[1]:
+    # Slightly Abnormal / Prediabetic / Mild Low Range
+    if (100.0 <= g < 126.0) or (55.0 <= g < 70.0):
         return 1
+    # High Risk / Diabetes / Severe Hypo or Hyperglycaemia (g >= 126 or g < 55)
     return 2
 
 

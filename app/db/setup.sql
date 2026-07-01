@@ -51,6 +51,6 @@ CREATE INDEX IF NOT EXISTS idx_applications_risk_tag ON applications (risk_tag);
 
 -- Optional: a dedicated low-privilege app user (recommended over using a superuser).
 -- Replace the password, and make sure it matches DB_USER / DB_PASSWORD in your .env.
--- CREATE USER healthchecker_user WITH PASSWORD 'change-me';
+-- CREATE USER healthchecker_user WITH PASSWORD 'healthchecker_pass';
 -- GRANT ALL PRIVILEGES ON DATABASE healthchecker TO healthchecker_user;
 -- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO healthchecker_user;

@@ -1,6 +1,6 @@
 # HealthChecker/app/api/routes/applications.py
 """
-api/routes/applications.py  –  Application CRUD endpoints (no auth, single page app).
+api/routes/applications.py  –  Application CRUD endpoints.
 """
 import logging
 from datetime import date, datetime, timedelta, timezone

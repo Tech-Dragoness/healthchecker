@@ -1,8 +1,6 @@
 # HealthChecker/app/models/models.py
 """
 models/models.py  –  SQLAlchemy ORM model for HealthChecker.
-
-Single-table, no auth / no roles — just blood-test applications.
 """
 import uuid
 import enum

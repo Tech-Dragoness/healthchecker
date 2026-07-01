@@ -17,9 +17,6 @@ export default function Navbar() {
         />
         HealthChecker
       </Link>
-      <div className="navbar-links">
-        <Link to="/new" className="btn btn-primary btn-sm">+ New Application</Link>
-      </div>
     </nav>
   )
 }
